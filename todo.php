@@ -15,9 +15,9 @@
  
 // The Code
 // ----------------------------------------------------------------------------------------------------
- 
+
 // Create array to hold list of todo items
-$items = array();
+$items = [];
  
 // The loop!
 do {
