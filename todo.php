@@ -85,8 +85,9 @@ do {
         // If 'B', place item at beginning of list. If 'E', place item at end.
         if ($listLocation == 'B') {
             array_unshift($items, $newItem);
-        } elseif ($listLocation == 'E') {
+        } else {
             array_push($items, $newItem);
+            // Does same as array_push: $items[] = $newItem;
         }
 
     } elseif ($input == 'D') {
