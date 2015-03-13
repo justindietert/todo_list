@@ -41,6 +41,12 @@ do {
     // Get the input from user
     // Use trim() to remove whitespace and newlines
     $input = strtoupper(trim(fgets(STDIN)));
+
+    // If user does not enter a set menu option, prompt them to do so
+    if ($input != 'N' || $input != 'D' || $input != 'S' || $input != 'R' || $input != 'Q') {
+        fwrite (STDOUT, "\n>> Choose from menu options only: N, D, S, R, or Q : ");
+        $input = strtoupper(trim(fgets(STDIN)));
+    }
  
     // Check for actionable input
     if ($input == 'N') {
