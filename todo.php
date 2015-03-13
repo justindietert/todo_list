@@ -23,12 +23,14 @@ $items = [];
 do {
     // Iterate through list items
     foreach ($items as $key => $item) {
+
+        $key += 1;
         // Display each item and a newline
-        echo "[{$key}] {$item}\n";
+        fwrite(STDOUT, "[{$key}] {$item}\n");
     }
  
     // Show the menu options
-    echo '(N)ew item, (R)emove item, (S)ort, (Q)uit : ';
+    fwrite(STDOUT, '(N)ew item, (R)emove item, (S)ort, (Q)uit : ');
  
     // Get the input from user
     // Use trim() to remove whitespace and newlines
@@ -37,22 +39,23 @@ do {
     // Check for actionable input
     if ($input == 'N') {
         // Ask for entry
-        echo 'Enter item : ';
+        fwrite(STDOUT, 'Enter item : ');
         // Add entry to list array
         $items[] = trim(fgets(STDIN));
+
     } elseif ($input == 'R') {
         // Remove which item?
-        echo 'Enter item number to remove : ';
-        // Get array key
-        $key = trim(fgets(STDIN));
+        fwrite(STDOUT, 'Enter item number to remove : ');
+        // Get item to remove from user
+        $k = trim(fgets(STDIN));
         // Remove from array
-        unset($items[$key]);
+        unset($items[$k - 1]);
     }
 // Exit when input is (Q)uit
 } while ($input != 'Q');
  
 // Say Goodbye!
-echo "Goodbye!\n";
+fwrite(STDOUT, "Goodbye!\n");
  
 // Exit with 0 errors
 exit(0);
