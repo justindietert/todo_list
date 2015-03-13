@@ -18,6 +18,28 @@
 
 // Create array to hold list of todo items
 $items = [];
+
+function sort_items($items) {
+    // Show sort menu options
+    fwrite(STDOUT, "\n## Sort Menu");
+    fwrite(STDOUT, "\n## (A)-Z, (Z)-A, (O)rder numerically, (R)everse numerically, (C)ancel : ");
+    // Get input from user
+    $sort = strtoupper(trim(fgets(STDIN)));
+
+    if($sort == 'A') {
+        asort($items);
+    } elseif ($sort == 'Z') {
+        arsort($items);
+    } elseif ($sort == 'O') {
+        ksort($items);
+    } elseif ($sort == 'R') {
+        krsort($items);
+    } elseif ($sort == 'C') {
+        // Exit sort menu and continue to loop
+        continue;
+    }
+    return $items;
+}
  
 // The loop!
 do {
@@ -43,10 +65,10 @@ do {
     $input = strtoupper(trim(fgets(STDIN)));
 
     // If user does not enter a set menu option, prompt them to do so
-    if ($input != 'N' || $input != 'D' || $input != 'S' || $input != 'R' || $input != 'Q') {
-        fwrite (STDOUT, "\n>> Choose from menu options only: N, D, S, R, or Q : ");
-        $input = strtoupper(trim(fgets(STDIN)));
-    }
+    // while ($input != 'N' || $input != 'D' || $input != 'S' || $input != 'R' || $input != 'Q') {
+    //     fwrite (STDOUT, "\n>> Choose from menu options only: N, D, S, R, or Q : ");
+    //     $input = strtoupper(trim(fgets(STDIN)));
+    // }
  
     // Check for actionable input
     if ($input == 'N') {
@@ -64,28 +86,8 @@ do {
         unset($items[$k - 1]);
 
     } elseif ($input == 'S') {
-        // Show sort menu options
-        fwrite(STDOUT, "\n## Sort Menu");
-        fwrite(STDOUT, "\n## (A)-Z, (Z)-A, (O)rder numerically, (R)everse numerically, (C)ancel : ");
-        // Get input from user
-        $sort = strtoupper(trim(fgets(STDIN)));
-
-        if($sort == 'A') {
-            // Alphabetize items
-            asort($items);
-        } elseif ($sort == 'Z') {
-            // Reverse alphabetize items
-            arsort($items);
-        } elseif ($sort == 'O') {
-            // Sort by key number
-            ksort($items);
-        } elseif ($sort == 'R') {
-            // Sort by reverse key number
-            krsort($items);
-        } elseif ($sort == 'C') {
-            // Exit sort menu and continue to loop
-            continue;
-        }
+        // Call sort_menu() function and reassign sorted items to the $items variable;
+        $items = sort_items($items);
 
     } elseif ($input == 'R') {
         // Specify what (R)enumber will do and ask user if they want to continue with this action
@@ -100,7 +102,7 @@ do {
             // Otherwise, continue with loop
             continue;
         }
-    }
+    } 
 
 // Exit when input is (Q)uit
 } while ($input != 'Q');
