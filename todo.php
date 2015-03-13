@@ -73,15 +73,16 @@ do {
  
     // Check for actionable input
     if ($input == 'N') {
-        // Ask for entry
+        // Ask for item entry
         fwrite(STDOUT, "\n## Enter item : ");
-        // Add entry to list array
+        // Add entry to variable
         $newItem = trim(fgets(STDIN));
-
+        // Ask user where they want the item added to list
         fwrite(STDOUT, "\n## Add to (B)eginning or (E)nd of list? ");
-
+        // Get location from user, handling lowercase entries by converting them to uppercase 
+        // and trimming whitespace
         $listLocation = strtoupper(trim(fgets(STDIN)));
-        
+        // If 'B', place item at beginning of list. If 'E', place item at end.
         if ($listLocation == 'B') {
             array_unshift($items, $newItem);
         } elseif ($listLocation == 'E') {
