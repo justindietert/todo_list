@@ -24,7 +24,7 @@ function sort_items($items) {
     fwrite(STDOUT, "\n## Sort Menu");
     fwrite(STDOUT, "\n## (A)-Z, (Z)-A, (O)rder numerically, (R)everse numerically, (C)ancel : ");
     // Get input from user
-    $sort = strtoupper(trim(fgets(STDIN)));
+    $sort = strtoupper(trim(fgets(STDIN))); 
 
     if($sort == 'A') {
         asort($items);
@@ -34,10 +34,11 @@ function sort_items($items) {
         ksort($items);
     } elseif ($sort == 'R') {
         krsort($items);
-    } elseif ($sort == 'C') {
-        // Exit sort menu and continue to loop
-        continue;
-    }
+    } 
+    // elseif ($sort == 'C') {
+    //     // Exit sort menu and continue to loop
+    //     continue 2;
+    // }
     return $items;
 }
  
