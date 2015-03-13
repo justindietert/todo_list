@@ -28,21 +28,21 @@ do {
     }
  
     // Show the menu options
-    echo '(N)ew item, (R)emove item, (Q)uit : ';
+    echo '(N)ew item, (R)emove item, (S)ort, (Q)uit : ';
  
     // Get the input from user
     // Use trim() to remove whitespace and newlines
-    $input = trim(fgets(STDIN));
+    $input = strtoupper(trim(fgets(STDIN)));
  
     // Check for actionable input
     if ($input == 'N') {
         // Ask for entry
-        echo 'Enter item: ';
+        echo 'Enter item : ';
         // Add entry to list array
         $items[] = trim(fgets(STDIN));
     } elseif ($input == 'R') {
         // Remove which item?
-        echo 'Enter item number to remove: ';
+        echo 'Enter item number to remove : ';
         // Get array key
         $key = trim(fgets(STDIN));
         // Remove from array
