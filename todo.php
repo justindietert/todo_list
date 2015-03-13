@@ -21,7 +21,7 @@ $items = [];
  
 // The loop!
 do {
-    // Force list to always display in numerical order even when items are removed
+    // Force list to always display in numerical order starting at 1 even when items are removed
     $items = array_values($items);
     // Iterate through list items
     foreach ($items as $key => $item) {
