@@ -23,7 +23,7 @@ $items = [];
 do {
     // Iterate through list items
     foreach ($items as $key => $item) {
-
+        // Start list numbering at one instead of zero
         $key += 1;
         // Display each item and a newline
         fwrite(STDOUT, "[{$key}] {$item}\n");
