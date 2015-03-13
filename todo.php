@@ -21,8 +21,11 @@ $items = [];
  
 // The loop!
 do {
-    // Force list to always display in numerical order starting at 1 even when items are removed
-    $items = array_values($items);
+    // Display to-do list title
+    fwrite(STDOUT, "\n----------------------");
+    fwrite(STDOUT, "\n----- To-do List -----");
+    fwrite(STDOUT, "\n----------------------\n");
+
     // Iterate through list items
     foreach ($items as $key => $item) {
         // Start list numbering at one instead of zero
@@ -32,7 +35,8 @@ do {
     }
  
     // Show the menu options
-    fwrite(STDOUT, '(N)ew item, (R)emove item, (S)ort, (Q)uit : ');
+    fwrite(STDOUT, "\n# Main Menu");
+    fwrite(STDOUT, "\n# (N)ew item, (D)elete item, (S)ort, (R)enumber, (Q)uit : ");
  
     // Get the input from user
     // Use trim() to remove whitespace and newlines
@@ -41,23 +45,62 @@ do {
     // Check for actionable input
     if ($input == 'N') {
         // Ask for entry
-        fwrite(STDOUT, 'Enter item : ');
+        fwrite(STDOUT, "\n## Enter item : ");
         // Add entry to list array
         $items[] = trim(fgets(STDIN));
 
-    } elseif ($input == 'R') {
+    } elseif ($input == 'D') {
         // Remove which item?
-        fwrite(STDOUT, 'Enter item number to remove : ');
+        fwrite(STDOUT, "\n## Enter item [number] to delete : ");
         // Get item to remove from user
         $k = trim(fgets(STDIN));
         // Remove from array
         unset($items[$k - 1]);
+
+    } elseif ($input == 'S') {
+        // Show sort menu options
+        fwrite(STDOUT, "\n## Sort Menu");
+        fwrite(STDOUT, "\n## (A)-Z, (Z)-A, (O)rder numerically, (R)everse numerically, (C)ancel : ");
+        // Get input from user
+        $sort = strtoupper(trim(fgets(STDIN)));
+
+        if($sort == 'A') {
+            // Alphabetize items
+            asort($items);
+        } elseif ($sort == 'Z') {
+            // Reverse alphabetize items
+            arsort($items);
+        } elseif ($sort == 'O') {
+            // Sort by key number
+            ksort($items);
+        } elseif ($sort == 'R') {
+            // Sort by reverse key number
+            krsort($items);
+        } elseif ($sort == 'C') {
+            // Exit sort menu and continue to loop
+            continue;
+        }
+
+    } elseif ($input == 'R') {
+        // Specify what (R)enumber will do and ask user if they want to continue with this action
+        fwrite (STDOUT, "\n## Keep current order and renumber starting at one?");
+        fwrite (STDOUT, "\n## (Y)es, (N)o : ");
+        // Get user input
+        $renumber = strtoupper(trim(fgets(STDIN)));
+        // If "yes", re-number list
+        if ($renumber == 'Y') {
+            $items = array_values($items);
+        } else {
+            // Otherwise, continue with loop
+            continue;
+        }
     }
+
 // Exit when input is (Q)uit
 } while ($input != 'Q');
  
 // Say Goodbye!
-fwrite(STDOUT, "Goodbye!\n");
+fwrite(STDOUT, "\n>> Goodbye!\n");
  
 // Exit with 0 errors
 exit(0);
