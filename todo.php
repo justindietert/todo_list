@@ -76,7 +76,17 @@ do {
         // Ask for entry
         fwrite(STDOUT, "\n## Enter item : ");
         // Add entry to list array
-        $items[] = trim(fgets(STDIN));
+        $newItem = trim(fgets(STDIN));
+
+        fwrite(STDOUT, "\n## Add to (B)eginning or (E)nd of list? ");
+
+        $listLocation = strtoupper(trim(fgets(STDIN)));
+        
+        if ($listLocation == 'B') {
+            array_unshift($items, $newItem);
+        } elseif ($listLocation == 'E') {
+            array_push($items, $newItem);
+        }
 
     } elseif ($input == 'D') {
         // Remove which item?
